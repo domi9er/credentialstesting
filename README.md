@@ -5,7 +5,7 @@ Git, Maven, Mikroarchitektur
 ## 1) Gegeben
 Gegeben ist eine Applikation, die Benutzer-Login-Daten (Credentials) exportieren kann. 
 
-Repository-URL der Applikation: https://github.com/clander/credentialstesting
+Repository-URL der Applikation: https://github.com/domi9er/credentialstesting
 
 ## 2) Funktionale Anforderungen
 Die bestehende Applikation ist mit der Zusatzfunktionalität zum Export der Benutzer-Login-Daten mit Passwort-Hash anstelle des Passworts in Klartext zu erweitern.
@@ -54,7 +54,7 @@ Der gesamte Entwicklungsprozess muss unter Verwendung von Git und GitHub begleit
 
 #### Abgabe
 - Am Ende des Tests wird ein finaler Push in das eigene Remote-Repo durchgeführt.
-- Dann folgt ein Pull-Request auf das Ausgangsrepo https://github.com/clander/credentialstesting
+- Dann folgt ein Pull-Request auf das Ausgangsrepo https://github.com/domi9er/credentialstesting
     - Beim Erstellen des Pull-Requests ist als Zielbranch im Target-Repository der Branch mit deinem Namen des Kandidaten zu wählen. 
     - Dieser Pull-Request gilt als Testabgabe. 
 
