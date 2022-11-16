@@ -3,18 +3,19 @@ package at.itkolleg.credentials;
 import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class HashDecorator implements ExportCredentials{
 
-    protected Credentials credentials;
+    protected ExportCredentials credentials;
 
     /**
-     * Konstruktor, der ein Objekt vom Typ Credentials erstellt und der mitgegebene Wert wird auf die globale Variable gesetzt
+     * Konstruktor, der ein Objekt vom Typ ExportCredentials erstellt und der mitgegebene Wert wird auf die globale Variable gesetzt
      * @param credentials
      */
-    public HashDecorator(Credentials credentials)
+    public HashDecorator(ExportCredentials credentials)
     {
         this.credentials = credentials;
     }
@@ -41,16 +42,16 @@ public class HashDecorator implements ExportCredentials{
      */
     @Override
     public void export(List<Credentials> credentialsList) {
-        String exportString = "";
+
+        List<Credentials> HashedList = new ArrayList<>();
+
         for(int i = 0;i<credentialsList.size();i++)
         {
             Credentials credentials = credentialsList.get(i);
-            exportString += credentials.getHost() +";"+ credentials.getUser() +";"+ stringHash(credentials.getPwd());
-            if(i < credentialsList.size()-1)
-            {
-                exportString += "\n";
-            }
+            Credentials newCred = new Credentials(credentials.getHost(), credentials.getUser(), stringHash(credentials.getPwd()));
+            HashedList.add(newCred);
         }
-        System.out.println(exportString);
+
+        this.credentials.export(HashedList);
     }
 }
