@@ -15,7 +15,7 @@ public class Main {
 
 
         //HashDecorator Testen
-        System.out.println("");
+        System.out.println(" ");
         ExportCredentials exportHashedCredentials = new HashDecorator(new CsvExporter());
         exportHashedCredentials.export(credentialsList);
     }
