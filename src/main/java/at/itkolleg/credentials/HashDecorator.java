@@ -60,7 +60,7 @@ public class HashDecorator extends ADecorator{
      * das Ergebnis wird dann zurückgegeben.
      *
      * @param hashString ist der zu hashende String.
-     * @return sha256hex ist der gehashte String
+     * @return sha256hex ist der fertige gehashte String
      */
     public String hashMethod(String hashString) {
 
