@@ -28,9 +28,16 @@ public abstract class ADecorator implements ExportCredentials {
     }
 
 
-    //Der Decorator delegiert die Arbeiten an die konkrete Komponente
+    /**
+     * Mit dieser Klasse delegiert der Decorator die Arbeiten an die konkrete Komponente (= der konkrete Exporter)
+     *
+     *@param credentialsList ist die zu exportierende Liste an Benutzer-Login-Daten.
+     */
+
     @Override
     public void export(List<Credentials> credentialsList) {
+        //Der Decorator delegiert die Arbeiten an die konkrete Komponente.
+        //Zusätzliche Verhaltensweisen können in Konkreten Decorateuren hinzugefügt werden
         wrappedCredentials.export(credentialsList);
     }
 }
