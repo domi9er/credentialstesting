@@ -33,9 +33,17 @@ public class HashDecorator extends ADecorator{
     @Override
     public void export(List<Credentials> credentialsList) {
 
-        //Konkrete Dekorierer leiten die Aufgaben an die umschlossenen konkreten Komponenten weiter,
-        //aber können dem Ergebnis etwas eigenes hinzufügen.
+        // Konkrete Dekorierer fügen dem Ergebnis etwas eigenes hinzufügen.
+        // 1. Das Passwort der übergebenen Daten Hashen
+        // 2. Die veränderten Daten an die eingewrappte konkrete Komponente übergeben
 
+        for(int i = 0;i<credentialsList.size();i++)
+        {
+            Credentials c = credentialsList.get(i);
+            //String hashPwd = c.getPwd();
+            String hashPwd = "#####";
+            c.setPwd(hashPwd);
+        }
         wrappedCredentials.export(credentialsList);
     }
 
