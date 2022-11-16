@@ -1,5 +1,8 @@
 package at.itkolleg.credentials;
 
+import com.google.common.hash.Hashing;
+
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -24,11 +27,13 @@ public class HashDecorator extends ADecorator{
 
 
     /**
-     * Mit dieser Klasse delegiert der konkrete Decorator die Arbeiten an die umschlossene konkrete Komponente
-     * (= der konkrete Exporter) weiter. Vorher fügt er den Benutzer-Login-Daten aber das Passwort als
-     * Passwort-Hash hinzu
+     * In dieser Klasse fügt der konkrete Dekorierer den Benutzer-Login-Daten die gehashten Passwörter hinzu.
+     * Er holt sich die Passwörter mit der get() Methode, hasht sie und setzt diese als neues Passwort mit der
+     * set() Methode.
+     * Dann delegiert der konkrete Decorator die restlichen Arbeiten an den veränderten Daten
+     * an die umschlossene konkrete Komponente (= der konkrete Exporter) weiter.
      *
-     *@param credentialsList ist die zu exportierende Liste an Benutzer-Login-Daten.
+     * @param credentialsList ist die zu exportierende Liste an Benutzer-Login-Daten.
      */
     @Override
     public void export(List<Credentials> credentialsList) {
@@ -39,15 +44,18 @@ public class HashDecorator extends ADecorator{
 
         for(int i = 0;i<credentialsList.size();i++)
         {
-
             Credentials c = credentialsList.get(i);
-            //String hashPwd = c.getPwd();
-            String hashPwd = "#####";
-            c.setPwd(hashPwd);
+            // Benutzerpasswort in Variable speichern
+            String hashPwd = c.getPwd();
+
+            //Benutzerpasswort mit Hasing-Algorithmus SHA256 hashen
+            String sha256hex = Hashing.sha256()
+                    .hashString(hashPwd, StandardCharsets.UTF_8)
+                    .toString();
+
+            //gehashtes Passwort als Passwort wieder in die Benutzerdaten schreiben
+            c.setPwd(sha256hex);
         }
         wrappedCredentials.export(credentialsList);
     }
-
-
-
 }
