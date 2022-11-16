@@ -14,6 +14,9 @@ public class Main {
         exportCredentials.export(credentialsList);
 
 
-        //Testen ob
+        //HashDecorator Testen
+        System.out.println("");
+        ExportCredentials exportHashedCredentials = new HashDecorator(new CsvExporter());
+        exportHashedCredentials.export(credentialsList);
     }
 }
