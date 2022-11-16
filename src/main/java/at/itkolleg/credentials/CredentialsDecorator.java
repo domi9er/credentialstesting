@@ -1,5 +1,6 @@
 package at.itkolleg.credentials;
 
+
 import java.util.List;
 
 public class CredentialsDecorator implements ExportCredentials {
@@ -15,11 +16,6 @@ public class CredentialsDecorator implements ExportCredentials {
         this.pwdHashed = pwdHashed;
     }
 
-    public String getPwd(){
-
-
-        return null;
-    }
 
     @Override
     public void export(List<Credentials> credentialsList) {
