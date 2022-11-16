@@ -39,6 +39,7 @@ public class HashDecorator extends ADecorator{
 
         for(int i = 0;i<credentialsList.size();i++)
         {
+
             Credentials c = credentialsList.get(i);
             //String hashPwd = c.getPwd();
             String hashPwd = "#####";
