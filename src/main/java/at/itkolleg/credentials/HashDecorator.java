@@ -46,15 +46,19 @@ public class HashDecorator implements ExportCredentials{
     @Override
     public void export(List<Credentials> credentialsList) {
 
+        //Oringale Liste an Credentials wird durchlaufen
         List<Credentials> HashedList = new ArrayList<>();
 
         for(int i = 0;i<credentialsList.size();i++)
         {
+            // Credentials aus der originalen Liste holen
             Credentials credentials = credentialsList.get(i);
+            // neue Credentials-Objekte aufbauen mit den Originaldaten, aber einem gehashten Passwort
             Credentials newCred = new Credentials(credentials.getHost(), credentials.getUser(), stringHash(credentials.getPwd()));
             HashedList.add(newCred);
         }
 
+        // die Modifizierten Credentials an den Original-Exporter übergeben
         this.credentials.export(HashedList);
     }
 }
