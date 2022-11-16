@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Credentials {
 
     private String host;
-    private String pwd;
+    private static String pwd;
     private String user;
 
     public Credentials(String host, String pwd, String user) {
