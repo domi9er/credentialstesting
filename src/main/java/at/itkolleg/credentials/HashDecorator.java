@@ -6,7 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Diese Klasse repräsentiert einen Decorator, dessen Aufgabe es ist das Passwort an einem Objekt aus einer ArrayListe mittels
+ * der Methode export(), welche die Klasse vom Interface ExportCredentials implementiert.
+ */
 public class HashDecorator implements ExportCredentials{
 
     protected ExportCredentials credentials;
