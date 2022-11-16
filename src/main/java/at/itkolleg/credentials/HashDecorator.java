@@ -28,8 +28,9 @@ public class HashDecorator extends ADecorator{
 
     /**
      * In dieser Klasse fügt der konkrete Dekorierer den Benutzer-Login-Daten die gehashten Passwörter hinzu.
-     * Er holt sich die Passwörter mit der get() Methode, hasht sie und setzt diese als neues Passwort mit der
-     * set() Methode.
+     * Er holt sich die ursprünglichen Passwörter, übergibt sie an die hashing Methode und schreibt die
+     * Ergebnisse als neue Passwörter wieder in die Benutzer-Login-Daten.
+     *
      * Dann delegiert der konkrete Decorator die restlichen Arbeiten an den veränderten Daten
      * an die umschlossene konkrete Komponente (= der konkrete Exporter) weiter.
      *
@@ -45,17 +46,29 @@ public class HashDecorator extends ADecorator{
         for(int i = 0;i<credentialsList.size();i++)
         {
             Credentials c = credentialsList.get(i);
-            // Benutzerpasswort in Variable speichern
-            String hashPwd = c.getPwd();
-
-            //Benutzerpasswort mit Hasing-Algorithmus SHA256 hashen
-            String sha256hex = Hashing.sha256()
-                    .hashString(hashPwd, StandardCharsets.UTF_8)
-                    .toString();
+            // Benutzerpasswort an hashing Methode übergeben und gehashtes Passwort in Variable speichern
+            String hashPwd = hashMethod(c.getPwd());
 
             //gehashtes Passwort als Passwort wieder in die Benutzerdaten schreiben
-            c.setPwd(sha256hex);
+            c.setPwd(hashPwd);
         }
         wrappedCredentials.export(credentialsList);
+    }
+
+    /**
+     * In dieser Klasse wird der als Parameter übergebene String mit dem Hasing-Algorithmus SHA256 gehasht und
+     * das Ergebnis wird dann zurückgegeben.
+     *
+     * @param hashString ist der zu hashende String.
+     * @return sha256hex ist der gehashte String
+     */
+    public String hashMethod(String hashString) {
+
+        //Den übergebenen String mit Hasing-Algorithmus SHA256 hashen
+        String sha256hex = Hashing.sha256()
+                .hashString(hashString, StandardCharsets.UTF_8)
+                .toString();
+
+        return sha256hex;
     }
 }
